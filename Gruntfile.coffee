@@ -36,7 +36,7 @@ module.exports = (grunt) ->
             runnw:
                 options:
                     stdout: true
-                command: [ '/build/cache/mac/0.9.2/node-webkit.app/Contents/MacOS/node-webkit --debug' , '\\build\\cache\\win\\0\.9\.2\\nw.exe --debug' ].join('&')
+                command: [ 'build/cache/mac/0.9.2/node-webkit.app/Contents/MacOS/node-webkit --debug' , '\\build\\cache\\win\\0\.9\.2\\nw.exe --debug' ].join('&')
 
         'regex-replace':
             windows_installer:
@@ -100,7 +100,7 @@ module.exports = (grunt) ->
                 cwd: 'build/releases/Atraci/linux64/'
                 src: '**'
 
-    
+
 
     grunt.loadNpmTasks 'grunt-contrib-clean'
     grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -112,7 +112,7 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-regex-replace'
     grunt.loadNpmTasks 'grunt-node-webkit-builder'
     grunt.loadNpmTasks 'grunt-contrib-compress'
-    
+
     grunt.registerTask 'default', ['compass', 'coffee']
     grunt.registerTask 'obfuscate', ['uglify', 'cssmin']
     grunt.registerTask 'nodewkbuild', ['nodewebkit', 'copy']
@@ -120,11 +120,11 @@ module.exports = (grunt) ->
     grunt.registerTask 'build', ['default', 'obfuscate', 'clean', 'regex-replace', 'nodewkbuild', 'compress']
 
 parseBuildPlatforms = (argumentPlatform) ->
-    
+
     # this will make it build no platform when the platform option is specified
     # without a value which makes argumentPlatform into a boolean
     inputPlatforms = argumentPlatform or process.platform + ';' + process.arch
-    
+
     # Do some scrubbing to make it easier to match in the regexes bellow
     inputPlatforms = inputPlatforms.replace('darwin', 'mac')
     inputPlatforms = inputPlatforms.replace(/;ia|;x|;arm/, '')
